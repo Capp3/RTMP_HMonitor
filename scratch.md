@@ -1,4 +1,7 @@
-# Application Structure
+# RTMP Application development
+
+
+## Application structure
 
 ```bash
 |- .gitignore                  # Git ignore file

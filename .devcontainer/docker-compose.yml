@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  rtmpmonitor01:
+    # This keeps the container alive for dev; we don't want it to exit
+    command: sleep infinity
+    
+    # This is where VS Code will mount your entire project folder
+    # (`:cached` or `:delegated` can help performance on macOS/Windows)
+    volumes:
+      - ../:/workspaces/rtmpmonitor:cached
+
+    # So that any code commands, debugging, etc. by default run here
+    working_dir: /workspaces/rtmpmonitor
+
+    # Optionally add dev-time environment variables or port forwards here
+    # environment:
+    #   - DEV_MODE=1
+    # ports:
+    #   - "3001:3001"
+    
+    # If you need to debug in C++/Rust/Go with gdb/lldb, you might need:
+    # cap_add:
+    #   - SYS_PTRACE
+    # security_opt:
+    #   - seccomp:unconfined

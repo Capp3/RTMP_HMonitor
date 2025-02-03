@@ -1,3 +1,5 @@
+version: '3.8'
+
 networks:
   rtmp_mon:
     driver: bridge
@@ -5,31 +7,31 @@ networks:
 volumes:
   rtmp01_db:
 
-
 services:
   rtmpmonitor01:
     image: python:bullseye
     container_name: rtmpmonitor
     restart: unless-stopped
-    user: ${puid:-1000}
+    user: "${puid:-1000}:${pgid:-1000}"
     networks:
       - rtmp_mon
-    # ports:
-    #   - ?
     volumes:
       - ./app:/usr/local/bin/rtmpmonitor
       - ./config:/usr/local/bin/rtmpmonitor/config
     environment:
-      - PUID={puid:-1000}
-      - PGID={pgid:-1000}
-      - TZ={tz:- 'Europe/Dublin'}
+      - PUID=${puid:-1000}
+      - PGID=${pgid:-1000}
+      - TZ=${tz:-Europe/Dublin}
+    # If you normally run your python script automatically, you might do:
+    # command: ["python", "/usr/local/bin/rtmpmonitor/rtmpmonitor.py"]
+    # But do NOT define it here if you want devcontainer to override.
 
   influxdb01:
     image: influxdb:2.7-alpine
     container_name: influxdb01
-    user: ${puid:-1000}
+    user: "${puid:-1000}:${pgid:-1000}"
     ports:
-      - ${influxdb_port:-8086}:8086
+      - "${influxdb_port:-8086}:8086"
     networks:
       - rtmp_mon
     volumes:
@@ -48,10 +50,10 @@ services:
     image: grafana/grafana-enterprise
     container_name: grafana
     restart: unless-stopped
-    user: ${puid:-1000}
+    user: "${puid:-1000}:${pgid:-1000}"
     ports:
-      - '3000:3000'
+      - "3001:3000"
     volumes:
-      - ./data/grafana:/var/lib/grafana'
+      - ./data/grafana:/var/lib/grafana
     networks:
       - rtmp_mon
