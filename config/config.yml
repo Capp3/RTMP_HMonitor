@@ -1,0 +1,53 @@
+backend:
+  database:
+    influxdb:
+      host: localhost
+      port: 8086
+      username: rtmphealthmonitor
+      password: rtmphealthmonitor
+      org: docs
+      reporting_time: 1000 # in milliseconds
+  reporting:
+    json_output:
+      port: 8092
+rtmpstreams:
+  - name: stream1
+    hardware:
+      webpresentor:
+        host: 172.16.16.16
+    provider:
+      vimeo:
+        eventid: '1231231'
+        vimeo_token: ${vimeo_token}
+        vimeo_key: ${vimeo_key}
+        vimeo_secret: ${vimeo_secret}
+  - name: stream2
+    hardware:
+      webpresentor:
+        host: 172.16.16.17
+    provider:
+      vimeo:
+        eventid: '1231232'
+        vimeo_token: ${vimeo_token}
+        vimeo_key: ${vimeo_key}
+        vimeo_secret: ${vimeo_secret}
+  - name: stream3
+    hardware:
+      webpresentor:
+        host: 172.16.16.16
+    provider:
+      vimeo:
+        eventid: '1231231'
+        vimeo_token: ${vimeo_token}
+        vimeo_key: ${vimeo_key}
+        vimeo_secret: ${vimeo_secret}
+  - name: stream4
+    hardware:
+      webpresentor:
+        host: 172.16.16.17
+    provider:
+      vimeo:
+        eventid: '1231232'
+        vimeo_token: ${vimeo_token}
+        vimeo_key: ${vimeo_key}
+        vimeo_secret: ${vimeo_secret}
