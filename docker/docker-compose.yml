@@ -1,4 +1,6 @@
 name: rtmphm_services
+networks:
+  rtmpservices:
 services:
   influxdb2:
     image: influxdb:2
