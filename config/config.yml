@@ -6,34 +6,45 @@ backend:                                   # Backend configuration
       # username: {db_un:-rtmphm}          # Database username (not used in Prometheus)
       # password: {db_pw:-rtmphm}          # Database password (not used in Prometheus)
   reporting:                               # Reporting configuration
-    - type: json_output                    # What reporting method is being used (json_output)
+    - type: json_output                    # What reporting method is being used (json_output), mux of all data
       port: 12000                          # Port to provide output on for HTTP GET requests
-rtmpstreams:                               # Primary Heading, RTMP stream configurations
+  logging:                                 # Logging setup
+    level: debug                           # Log at what level possible, {debug, error, warning, info}
+    location: /var/log/rtmphm.log          # Log path
+    retention: 10                          # Log retention in days
+speedtest:                                 # Speedtest definitions, if ommited no speedtest will be performed
+  polling_time: 10                         # How often speedtest performed, in seconds
+  server:                                  # what server to use, if undefined default to speedtest.net
+streams:                                   # Primary Heading, stream configurations
   - name: stream1                          # Stream name
     provider:                              # Provider (Stream) configuration            
-      vimeo:                               # Provider name, Provider specific configuration follows
+      vimeolive:                           # Provider name, Provider specific configuration follows
         eventid: '1231231'
         vimeo_token: ${vimeo_token}
         vimeo_key: ${vimeo_key}
         vimeo_secret: ${vimeo_secret}
+      polling_time: 2                     # How often is stream probed, in seconds
   - name: stream2
     provider:
-      vimeo:
+      vimeolive:
         eventid: '1231232'
         vimeo_token: ${vimeo_token}
         vimeo_key: ${vimeo_key}
         vimeo_secret: ${vimeo_secret}
+      polling_time: 2
   - name: stream3
     provider:
-      vimeo:
-        eventid: '1231231'
+      vimeolive:
+        eventid: '1231233'
         vimeo_token: ${vimeo_token}
         vimeo_key: ${vimeo_key}
         vimeo_secret: ${vimeo_secret}
+      polling_time: 2
   - name: stream4
     provider:
-      vimeo:
-        eventid: '1231232'
+      vimeolive:
+        eventid: '123124'
         vimeo_token: ${vimeo_token}
         vimeo_key: ${vimeo_key}
         vimeo_secret: ${vimeo_secret}
+      polling_time: 2

@@ -18,9 +18,9 @@
 |    |- structure.md            # This here, the only way I can think
 |- src                          # The application
 |    |- attributes              # configuration information
-|    |    |- providers.py       # definitions for interacting with different streaming providers
-|    |- main.py                 # Python application basics/ setup logging
-|    |- threads.py              # program actions
+|    |    |- providers.py       # definitions for interacting with different streaming providers, retrieve url to be probed
+|    |- main.py                 # Python application basics/ setup logging & log rotation
+|    |- threads.py              # program actions, probe stream, return results as json
 |- .gitignore                   # Git ignore file
 |- LICENSE                      # Pretty straight forward
 |- README.md                    # Readme... yep
