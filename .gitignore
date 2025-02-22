@@ -175,5 +175,3 @@ data/
 .env
 
 influxdata-archive*
-
-.vscode/
