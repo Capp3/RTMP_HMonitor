@@ -1,0 +1,1 @@
+# Script to create JSON report on exposed for for ingest to DB

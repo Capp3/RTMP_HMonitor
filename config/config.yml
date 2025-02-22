@@ -1,10 +1,10 @@
 backend:                                   # Backend configuration
   database:                                # Database configuration
-    - type: prometheus                     # What database is being used (prometheus)
+    - type: influxdb                       # What database is being used
       host: ${db_host:-localhost}          # Hostname, or IP address, of the database
       port: ${db_port:-9090}               # Port of the database
-      # username: {db_un:-rtmphm}          # Database username (not used in Prometheus)
-      # password: {db_pw:-rtmphm}          # Database password (not used in Prometheus)
+      # username: {db_un:-rtmphm}          # Database username
+      # password: {db_pw:-rtmphm}          # Database password
   reporting:                               # Reporting configuration
     - type: json_output                    # What reporting method is being used (json_output), mux of all data
       port: 12000                          # Port to provide output on for HTTP GET requests
@@ -24,6 +24,9 @@ streams:                                   # Primary Heading, stream configurati
         vimeo_key: ${vimeo_key}
         vimeo_secret: ${vimeo_secret}
       polling_time: 2                     # How often is stream probed, in seconds
+    hardware:
+      webpresentor:
+        ip_address: 192.192.192.192
   - name: stream2
     provider:
       vimeolive:
@@ -32,6 +35,9 @@ streams:                                   # Primary Heading, stream configurati
         vimeo_key: ${vimeo_key}
         vimeo_secret: ${vimeo_secret}
       polling_time: 2
+    hardware:
+      webpresentor:
+        ip_address: 192.192.192.192
   - name: stream3
     provider:
       vimeolive:
@@ -40,6 +46,9 @@ streams:                                   # Primary Heading, stream configurati
         vimeo_key: ${vimeo_key}
         vimeo_secret: ${vimeo_secret}
       polling_time: 2
+    hardware:
+      webpresentor:
+        ip_address: 192.192.192.192
   - name: stream4
     provider:
       vimeolive:
@@ -48,3 +57,6 @@ streams:                                   # Primary Heading, stream configurati
         vimeo_key: ${vimeo_key}
         vimeo_secret: ${vimeo_secret}
       polling_time: 2
+    hardware:
+      webpresentor:
+        ip_address: 192.192.192.192
