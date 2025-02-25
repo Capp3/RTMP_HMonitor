@@ -1,28 +1,33 @@
 # Script for monitoring network health and statistics
 
 import json
-import requests
+
+import netifaces
 import psutil
 import pyshark
-import netifaces
-from scapy.all import sniff, Raw
+import requests
 from bcc import BPF
+from scapy.all import Raw, sniff
 
 # Bandwidth monitoring
 
 net_io = psutil.net_io_counters(pernic=True)  # Get per-interface stats
 
 # Format JSON output
-network_stats = {iface: {
-    "bytes_sent": stats.bytes_sent,
-    "bytes_recv": stats.bytes_recv,
-    "packets_sent": stats.packets_sent,
-    "packets_recv": stats.packets_recv
-} for iface, stats in net_io.items()}
+network_stats = {
+    iface: {
+        "bytes_sent": stats.bytes_sent,
+        "bytes_recv": stats.bytes_recv,
+        "packets_sent": stats.packets_sent,
+        "packets_recv": stats.packets_recv,
+    }
+    for iface, stats in net_io.items()
+}
 
 print(json.dumps(network_stats, indent=4))
 
-#Sniff and Analyise
+# Sniff and Analyise
+
 
 ## Function to process packets
 def process_packet(packet):
@@ -31,17 +36,18 @@ def process_packet(packet):
             "src": packet[0].src,
             "dst": packet[0].dst,
             "protocol": packet[0].proto,
-            "payload": packet[Raw].load.hex()
+            "payload": packet[Raw].load.hex(),
         }
         print(json.dumps(packet_data, indent=4))
+
 
 ## Sniff packets on eth0 (change to correct interface)
 sniff(iface="eth0", filter="port 1935", prn=process_packet, count=10)
 
-#Protocal Analysis
+# Protocal Analysis
 
 ## Capture packets on eth0 for RTMP (port 1935)
-capture = pyshark.LiveCapture(interface='eth0', display_filter='tcp.port == 1935')
+capture = pyshark.LiveCapture(interface="eth0", display_filter="tcp.port == 1935")
 
 for packet in capture.sniff_continuously(packet_count=5):
     packet_info = {
@@ -49,18 +55,17 @@ for packet in capture.sniff_continuously(packet_count=5):
         "src_ip": packet.ip.src,
         "dst_ip": packet.ip.dst,
         "protocol": packet.transport_layer,
-        "length": packet.length
+        "length": packet.length,
     }
     print(json.dumps(packet_info, indent=4))
 
-#NIC Info
-
+# NIC Info
 
 
 interfaces = {iface: netifaces.ifaddresses(iface) for iface in netifaces.interfaces()}
 print(json.dumps(interfaces, indent=4))
 
-#Network Monitoring
+# Network Monitoring
 
 ## BPF program to monitor TCP packets
 bpf_script = """

@@ -2,28 +2,6 @@ name: rtmphm_services
 networks:
   rtmpservices:
 services:
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-    ports:
-      - 9090:9090
-    restart: unless-stopped
-    volumes:
-      - ./prometheus:/etc/prometheus
-      - prom_data:/prometheus
-  grafana:
-    image: grafana/grafana
-    container_name: grafana
-    ports:
-      - 3000:3000
-    restart: unless-stopped
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=grafana
-    volumes:
-      - ./grafana:/etc/grafana/provisioning/datasources
   portainer-ce:
     ports:
       - 8000:8000
@@ -35,7 +13,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     image: portainer/portainer-ce:2.21.5
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/datasources
 
 volumes:
-  prom_data:
   portainer_data:
