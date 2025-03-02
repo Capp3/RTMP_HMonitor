@@ -12,6 +12,8 @@ backend:                                   # Backend configuration
     level: debug                           # Log at what level possible, {debug, error, warning, info}
     location: /var/log/rtmphm.log          # Log path
     retention: 10                          # Log retention in days
+  networking:
+    interface: eth0                       # Network interface to use
 speedtest:                                 # Speedtest definitions, if ommited no speedtest will be performed
   polling_time: 10                         # How often speedtest performed, in seconds
   server:                                  # what server to use, if undefined default to speedtest.net
