@@ -25,13 +25,13 @@
 		"ghcr.io/devcontainers-extra/features/wget-apt-get:1": {},
 		"ghcr.io/devcontainers-extra/features/yamllint:2": {},
 		"ghcr.io/devcontainers-extra/features/zsh-plugins:0": {}
-	}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [3000, 8000, 9000, 9443, 8086],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip3 install --user -r requirements.txt",
