@@ -1,7 +1,16 @@
+---
 name: rtmphm_services
+#### Networks
 networks:
   rtmpservices:
+#### Volumes
+volumes:
+  portainer_data:
+  influxdb2-data:
+  influxdb2-config:
+#### Services
 services:
+  #### Portainer to monitor the containers
   portainer-ce:
     ports:
       - 8000:8000
@@ -13,17 +22,42 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     image: portainer/portainer-ce:2.21.5
+    networks:
+      - rtmpservices
+
+  #### InfluxDB2
+  influxdb2:
+    ports:
+      - 8086:8086
+    container_name: influxdb2
+    restart: unless-stopped
+    volumes:
+      - influxdb2-data:/var/lib/influxdb2
+      - influxdb2-config:/etc/influxdb2
+    networks:
+      - rtmpservices
+    image: influxdb:2.7.11
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: ${influx_setup_mode:-setup}
+      DOCKER_INFLUXDB_INIT_USERNAME: ${influxdb-admin-username:-admin}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${influxdb-admin-password:-admin}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${influx_admin_token:-s@cr@t}
+      DOCKER_INFLUXDB_INIT_ORG: ${influx_init_org:-rtmphealthmonitor}
+      DOCKER_INFLUXDB_INIT_BUCKET: home
+
+  #### Grafana Dashboard
   grafana:
-    image: grafana/grafana
-    container_name: grafana
     ports:
       - 3000:3000
+    container_name: grafana
     restart: unless-stopped
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=grafana
     volumes:
       - ./grafana:/etc/grafana/provisioning/datasources
-
-volumes:
-  portainer_data:
+    image: grafana/grafana
+    networks:
+      - rtmpservices
+    environment:
+      - GF_SECURITY_ADMIN_USER=${grafana_user:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${grafana_password:-grafana}
+    depends_on:
+      - influxdb2
