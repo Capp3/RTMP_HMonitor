@@ -1,15 +1,16 @@
 {
-  "recommendations": [
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "charliermarsh.ruff",
-    "ms-azuretools.vscode-docker",
-    "redhat.vscode-yaml",
-    "esbenp.prettier-vscode",
-    "streetsidesoftware.code-spell-checker",
-    "eamodio.gitlens",
-    "gruntfuggly.todo-tree",
-    "github.copilot",
-    "oderwat.indent-rainbow"
-  ]
+    "recommendations": [
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "eamodio.gitlens",
+        "gruntfuggly.todo-tree",
+        "github.copilot",
+        "oderwat.indent-rainbow",
+        "miguelsolorio.fluent-icons",
+        "pkief.material-icon-theme"
+    ]
 }

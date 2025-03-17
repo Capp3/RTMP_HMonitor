@@ -2,8 +2,10 @@
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
     "python.venvPath": "${workspaceFolder}/.venv",
     "python.analysis.extraPaths": [
-      "${workspaceFolder}/src"
+        "${workspaceFolder}/src"
     ],
+    "python.languageServer": "None",
+    "python.analysis.typeCheckingMode": "off",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": false,
@@ -18,49 +20,48 @@
     "editor.detectIndentation": false,
     "files.autoSave": "afterDelay",
     "files.exclude": {
-      "**/__pycache__": true,
-      "**/.pytest_cache": true,
-      "**/.mypy_cache": true
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/.mypy_cache": true
     },
     "files.associations": {
-      "**/docker/*.yml": "dockercompose",
-      "**/docker/*.yaml": "dockercompose",
-      "**/*.yml": "yaml",
-      "**/*.yaml": "yaml"
+        "**/docker/*.yml": "dockercompose",
+        "**/docker/*.yaml": "dockercompose",
+        "**/*.yml": "yaml",
+        "**/*.yaml": "yaml"
     },
     "docker.composeFilePaths": [
-      "${workspaceFolder}/docker/docker-compose.yml"
+        "${workspaceFolder}/docker/docker-compose.yml"
     ],
     "docker.composeCommand": "docker compose",
     "docker.enableDebugging": true,
     "terminal.integrated.defaultProfile.linux": "bash",
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.env.linux": {
-      "VIRTUAL_ENV": "${workspaceFolder}/.venv",
-      "PATH": "${workspaceFolder}/.venv/bin:${env:PATH}"
+        "VIRTUAL_ENV": "${workspaceFolder}/.venv",
+        "PATH": "${workspaceFolder}/.venv/bin:${env:PATH}"
     },
     "terminal.integrated.env.osx": {
-      "VIRTUAL_ENV": "${workspaceFolder}/.venv",
-      "PATH": "${workspaceFolder}/.venv/bin:${env:PATH}"
+        "VIRTUAL_ENV": "${workspaceFolder}/.venv",
+        "PATH": "${workspaceFolder}/.venv/bin:${env:PATH}"
     },
     "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": false,
     "python.testing.pytestArgs": [
-      "tests"
+        "tests"
     ],
     "[python]": {
-      "editor.tabSize": 4,
-      "editor.insertSpaces": true,
-      "editor.defaultFormatter": "charliermarsh.ruff"
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "charliermarsh.ruff"
     },
     "[yaml]": {
-      "editor.tabSize": 2,
-      "editor.insertSpaces": true
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
     },
     "[json]": {
-      "editor.tabSize": 2,
-      "editor.insertSpaces": true,
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
-  }
-  
+}

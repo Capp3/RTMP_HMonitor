@@ -1,7 +1,6 @@
 # Script for monitoring network health and statistics
 
 import json
-
 import netifaces
 import psutil
 import pyshark

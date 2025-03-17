@@ -3,8 +3,8 @@ backend:                                   # Backend configuration
     - type: influxdb                       # What database is being used
       host: ${db_host:-localhost}          # Hostname, or IP address, of the database
       port: ${db_port:-9090}               # Port of the database
-      # username: {db_un:-rtmphm}          # Database username
-      # password: {db_pw:-rtmphm}          # Database password
+      username: ${db_un:-rtmphm}           # Database username
+      password: ${db_pw:-rtmphm}           # Database password
   reporting:                               # Reporting configuration
     - type: json_output                    # What reporting method is being used (json_output), mux of all data
       port: 12000                          # Port to provide output on for HTTP GET requests
@@ -62,3 +62,10 @@ streams:                                   # Primary Heading, stream configurati
     hardware:
       webpresentor:
         ip_address: 192.192.192.192
+  - name: youtubelive
+    provider:
+      youtube:
+        video_id: '1231231'
+        api_key: ${youtube_api_key}
+      polling_time: 2
+      
